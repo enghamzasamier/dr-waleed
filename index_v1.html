@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-[#121212] text-snow">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Waleed Ghoniem | Academic & Consultant (Editorial Variation)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        black: '#121212',
+                        charcoal: '#181a17',
+                        cardBg: '#1c1e1b',
+                        snow: '#fffbfc',
+                        gold: '#C5A880',
+                    },
+                    fontFamily: {
+                        display: ['Prata', 'serif'],
+                        body: ['Epilogue', 'sans-serif'],
+                    },
+                    animation: {
+                        'marquee': 'marquee 25s linear infinite',
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-50%)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@300;400;500;600;700&family=Prata&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --black: #121212;
+            --charcoal: #181a17;
+            --cardBg: #1c1e1b;
+            --snow: #fffbfc;
+            --gold: #C5A880;
+        }
+        body {
+            background-color: var(--black);
+            color: var(--snow);
+            cursor: none;
+            overflow-x: hidden;
+            overscroll-behavior: none;
+        }
+        ::selection {
+            background: var(--snow);
+            color: var(--black);
+        }
+        
+        /* Custom Cursor */
+        .cursor-dot {
+            position: fixed;
+            top: 0; left: 0;
+            width: 8px; height: 8px;
+            background-color: var(--snow);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 10000;
+            transition: width 0.3s, height 0.3s, background-color 0.3s;
+        }
+        .cursor-outline {
+            position: fixed;
+            top: 0; left: 0;
+            width: 40px; height: 40px;
+            border: 1px solid rgba(255, 251, 252, 0.4); /* snow */
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9998;
+            transition: transform 0.15s ease-out, width 0.3s, height 0.3s;
+        }
+
+        /* Ambient Glow */
+        #glow-orb {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 251, 252, 0.05) 0%, rgba(1,4,0,0) 70%);
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(50px);
+            transition: top 2s ease-out, left 2s ease-out;
+        }
+        
+        /* Scroll Reveal Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Magnetic Elements */
+        .magnetic {
+            display: inline-block;
+            transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1);
+        }
+
+        /* Abstract Grid Pattern overlay */
+        .bg-chart {
+            background-image: repeating-linear-gradient(to right, transparent, transparent 40px, rgba(255, 251, 252, 0.015) 40px, rgba(255, 251, 252, 0.015) 41px), 
+                              repeating-linear-gradient(to bottom, transparent, transparent 40px, rgba(255, 251, 252, 0.015) 40px, rgba(255, 251, 252, 0.015) 41px);
+        }
+
+        /* Preloader */
+        #preloader {
+            position: fixed;
+            inset: 0;
+            background: var(--black);
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 1.2s cubic-bezier(0.76, 0, 0.24, 1);
+        }
+        #preloader.hide {
+            transform: translateY(-100%);
+        }
+
+        /* Noise Texture */
+        .noise::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Utilities */
+        ::-webkit-scrollbar { display: none; }
+        .text-snow { color: var(--snow); }
+        .bg-snow { background-color: var(--snow); }
+        .border-snow { border-color: var(--snow); }
+        
+        /* Glass Card Base */
+        .glass-card {
+            background: rgba(255, 251, 252, 0.02);
+            border: 1px solid rgba(255, 251, 252, 0.05);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, background 0.4s ease;
+        }
+        .glass-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 251, 252, 0.04);
+        }
+
+        .mask-image-bottom {
+            -webkit-mask-image: linear-gradient(to top, transparent 0%, black 20%);
+            mask-image: linear-gradient(to top, transparent 0%, black 20%);
+        }
+    </style>
+</head>
+<body class="antialiased noise">
+
+    <!-- Scroll Progress Indicator -->
+    <div class="fixed top-0 left-0 w-full h-[3px] bg-white/5 z-[9999] pointer-events-none">
+        <div class="h-full bg-snow transition-all duration-100" id="scroll-progress" style="width: 0%"></div>
+    </div>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="font-display text-5xl text-snow overflow-hidden">
+            <span class="inline-block transition-transform duration-1000 translate-y-full opacity-0" id="preloader-text">WG.</span>
+        </div>
+    </div>
+
+    <div id="glow-orb"></div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-outline" id="cursor-outline"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full px-8 py-6 flex justify-between items-center z-50 bg-black/40 backdrop-blur-md border-b border-white/5">
+        <div class="font-display text-3xl tracking-wider text-snow select-none magnetic hover-target">WG.</div>
+        <div class="hidden md:flex gap-8 font-body text-xs text-snow/75">
+            <a href="#about" class="hover-target magnetic hover:text-white transition-colors relative group py-1.5">
+                About
+                <span class="absolute bottom-0 left-0 w-0 h-[1.5px] bg-snow transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="#experience" class="hover-target magnetic hover:text-white transition-colors relative group py-1.5">
+                Experience
+                <span class="absolute bottom-0 left-0 w-0 h-[1.5px] bg-snow transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="#research" class="hover-target magnetic hover:text-white transition-colors relative group py-1.5">
+                Research
+                <span class="absolute bottom-0 left-0 w-0 h-[1.5px] bg-snow transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="#publications" class="hover-target magnetic hover:text-white transition-colors relative group py-1.5">
+                Publications
+                <span class="absolute bottom-0 left-0 w-0 h-[1.5px] bg-snow transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="#contact" class="hover-target magnetic hover:text-white transition-colors relative group py-1.5">
+                Contact
+                <span class="absolute bottom-0 left-0 w-0 h-[1.5px] bg-snow transition-all duration-300 group-hover:w-full"></span>
+            </a>
+        </div>
+        <div class="flex items-center gap-4 font-body text-xs text-snow/60">
+            <a href="#" class="hover-target magnetic hover:text-white transition-colors">English</a>
+            <span class="text-snow/30">|</span>
+            <a href="ar.html" class="hover-target magnetic hover:text-white transition-colors">عربي</a>
+        </div>
+    </nav>
+
+    <!-- 1. HERO SECTION (Editorial Brutalist - Oversized Typo Preserved) -->
+    <main class="w-full relative z-10 pt-36 pb-20 bg-chart overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-[80vh]">
+                
+                <!-- Left Title Content Column -->
+                <div class="lg:col-span-7 z-20 reveal">
+                    <!-- Mini Tagline -->
+                    <div class="flex items-center gap-4 mb-4">
+                        <span class="font-body text-[9px] uppercase tracking-[0.25em] text-snow/50 font-medium">ACCOUNTING LECTURER & STRATEGIC CONSULTANT</span>
+                    </div>
+                    
+                    <!-- Massive Stacked Editorial Header (Signature Preserved) -->
+                    <h1 class="font-display text-[11vw] lg:text-[7.5vw] uppercase leading-[0.8] tracking-tighter text-snow flex flex-col mb-12 select-none">
+                        <span>WALEED</span>
+                        <span class="pl-[6vw] lg:pl-[8vw]">GHONIEM.</span>
+                    </h1>
+                    
+                    <!-- Objective Paragraph (Readability size up) -->
+                    <p class="font-body text-snow/75 text-base lg:text-lg leading-relaxed font-light mb-10 max-w-lg">
+                        Accomplished academic and consultant with proven expertise in training, strategic planning, and organizational development.
+                    </p>
+                    
+                    <!-- Call-to-actions -->
+                    <div class="flex flex-wrap gap-4 mb-12">
+                        <a href="#contact" class="hover-target magnetic inline-flex items-center gap-3 bg-snow text-black px-8 py-3.5 text-xs font-semibold uppercase tracking-wider transition-all duration-300 hover:bg-transparent hover:text-snow border border-snow">
+                            Get in Touch <i class="fas fa-arrow-right text-[10px]"></i>
+                        </a>
+                        <a href="links.html" class="hover-target magnetic inline-flex items-center gap-3 border border-snow/20 text-snow px-8 py-3.5 text-xs font-semibold uppercase tracking-wider transition-all duration-300 hover:border-snow hover:bg-white/5">
+                            View Links <i class="fas fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Overlapping Grayscale Portrait Column -->
+                <div class="lg:col-span-5 relative z-10 flex justify-center lg:justify-end reveal mt-8 lg:mt-0" style="transition-delay: 0.15s">
+                    <!-- Circular crosshair stamp left behind image -->
+                    <div class="absolute left-[-20px] top-[10%] w-24 h-24 rounded-full border border-white/10 flex items-center justify-center pointer-events-none select-none">
+                        <div class="w-16 h-16 rounded-full border border-dashed border-white/5 flex items-center justify-center">
+                            <span class="text-[8px] tracking-wider text-white/20 uppercase font-body">WG.</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Outline Square Frame -->
+                    <div class="absolute top-[-10px] left-[-10px] lg:left-[10%] w-[90%] lg:w-[85%] h-[102%] border border-white/10 z-0"></div>
+
+                    <!-- Grayscale main photo -->
+                    <div class="relative w-[90%] lg:w-[85%] aspect-[3/4] overflow-hidden bg-charcoal z-10 group">
+                        <img src="freash%20cool%20suit%20.jpeg" alt="Dr. Waleed Ghoniem" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 scale-105 group-hover:scale-100 mask-image-bottom">
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </main>
+
+    <!-- 2. INFINITE TICKER MARQUEE -->
+    <section class="w-full border-y border-white/10 py-6 overflow-hidden bg-charcoal/50 select-none">
+        <div class="flex whitespace-nowrap overflow-hidden">
+            <div class="inline-block animate-marquee font-display text-xl md:text-2xl uppercase tracking-[0.15em] text-snow/40 italic">
+                ACCOUNTING LECTURER &bull; STRATEGIC CONSULTANT &bull; CERTIFIED TRAINER &bull; FEASIBILITY STUDIES EXPERT &bull; QUALITY ASSURANCE AUDITOR &bull;&nbsp;
+            </div>
+            <div class="inline-block animate-marquee font-display text-xl md:text-2xl uppercase tracking-[0.15em] text-snow/40 italic" aria-hidden="true">
+                ACCOUNTING LECTURER &bull; STRATEGIC CONSULTANT &bull; CERTIFIED TRAINER &bull; FEASIBILITY STUDIES EXPERT &bull; QUALITY ASSURANCE AUDITOR &bull;&nbsp;
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. BASIC EDUCATION (Editorial Grid - py-32 Spacing Gaps) -->
+    <section id="about" class="py-32 bg-black text-snow relative border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                <!-- Left Title Header (6-step typographic h2) -->
+                <div class="lg:col-span-4 reveal">
+                    <span class="font-body text-[9px] uppercase tracking-[0.25em] text-snow/45 font-bold block mb-4">ACADEMIC CREDENTIALS</span>
+                    <h2 class="font-display text-3xl lg:text-4xl text-snow leading-tight">Basic Education</h2>
+                </div>
+                
+                <!-- Right Columns separated by thin lines -->
+                <div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0">
+                    <!-- PhD -->
+                    <div class="reveal md:px-8 md:border-l border-white/10 flex flex-col justify-between h-full min-h-[180px]">
+                        <div>
+                            <div class="text-snow/35 text-xl mb-4"><i class="fas fa-graduation-cap"></i></div>
+                            <h3 class="font-display text-xl md:text-2xl text-snow mb-3 leading-tight">Ph.D. Accounting</h3>
+                            <p class="font-body text-[15px]/relaxed text-snow/75 leading-relaxed font-light">Cairo University, 2017</p>
+                            <p class="font-body text-[12px] text-snow/45 mt-3 leading-relaxed">Thesis: TQM evaluation on Egyptian accounting educational frameworks.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Masters -->
+                    <div class="reveal md:px-8 md:border-l border-white/10 flex flex-col justify-between h-full min-h-[180px]" style="transition-delay: 0.1s">
+                        <div>
+                            <div class="text-snow/35 text-xl mb-4"><i class="fas fa-university"></i></div>
+                            <h3 class="font-display text-xl md:text-2xl text-snow mb-3 leading-tight">Master's in Accounting</h3>
+                            <p class="font-body text-[15px]/relaxed text-snow/75 leading-relaxed font-light">Cairo University, 2012</p>
+                            <p class="font-body text-[12px] text-snow/45 mt-3 leading-relaxed">Thesis: Solving problems of planning and executing environmental auditing.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Bachelors -->
+                    <div class="reveal md:px-8 md:border-l border-white/10 flex flex-col justify-between h-full min-h-[180px]" style="transition-delay: 0.2s">
+                        <div>
+                            <div class="text-snow/35 text-xl mb-4"><i class="fas fa-book"></i></div>
+                            <h3 class="font-display text-xl md:text-2xl text-snow mb-3 leading-tight">Bachelor of Commerce</h3>
+                            <p class="font-body text-[15px]/relaxed text-snow/75 leading-relaxed font-light">Cairo University, 2007</p>
+                            <p class="font-body text-[12px] text-snow/45 mt-3 leading-relaxed">Major: Accounting. Grade: Excellent with honor degree.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. PROFESSIONAL DEVELOPMENT (Columns Layout - py-32 Spacing Gaps) -->
+    <section class="py-32 bg-black text-snow relative border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                <!-- Left Title (6-step typographic h2) -->
+                <div class="lg:col-span-4 reveal">
+                    <span class="font-body text-[9px] uppercase tracking-[0.25em] text-snow/45 font-bold block mb-4">CONTINUOUS EDUCATION</span>
+                    <h2 class="font-display text-3xl lg:text-4xl text-snow leading-tight">Professional Development</h2>
+                </div>
+                
+                <!-- Right Columns -->
+                <div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0">
+                    <!-- Column 1 -->
+                    <div class="reveal md:px-8 md:border-l border-white/10">
+                        <h4 class="font-body text-[10px] uppercase tracking-[0.2em] text-snow/40 font-bold mb-4">LEADERSHIP & MGMT</h4>
+                        <ul class="space-y-4 text-[15px]/relaxed font-body text-snow/75 font-light leading-relaxed">
+                            <li>&bull; Leadership in Academic Management Program</li>
+                            <li>&bull; Leadership Development Center, Helwan University</li>
+                            <li>&bull; Corporate Governance & Board Effectiveness Trainer</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Column 2 -->
+                    <div class="reveal md:px-8 md:border-l border-white/10" style="transition-delay: 0.1s">
+                        <h4 class="font-body text-[10px] uppercase tracking-[0.2em] text-snow/40 font-bold mb-4">FINANCE & TAXATION</h4>
+                        <ul class="space-y-4 text-[15px]/relaxed font-body text-snow/75 font-light leading-relaxed">
+                            <li>&bull; Advanced Taxation Planning Certificate</li>
+                            <li>&bull; Tax Legislation Program, Egyptian Tax Authority</li>
+                            <li>&bull; IFRS Update - Financial Instruments Standards</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Column 3 -->
+                    <div class="reveal md:px-8 md:border-l border-white/10" style="transition-delay: 0.2s">
+                        <h4 class="font-body text-[10px] uppercase tracking-[0.2em] text-snow/40 font-bold mb-4">QUALITY & AUDIT</h4>
+                        <ul class="space-y-4 text-[15px]/relaxed font-body text-snow/75 font-light leading-relaxed">
+                            <li>&bull; Higher Education Institution QA Internal Review Program</li>
+                            <li>&bull; Environmental Auditing & Compliance Standards</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. CERTIFICATIONS & LICENSES (Color-coded Enhancements) -->
+    <section class="py-32 bg-black text-snow border-b border-white/5 relative">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <span class="font-body text-[9px] uppercase tracking-[0.25em] text-snow/45 font-bold block mb-4">EXPERTISE VERIFIED</span>
+                <h2 class="font-display text-3xl lg:text-4xl text-snow">Certifications & Licenses</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Cert 1 (CMA - Emerald coded) -->
+                <div class="glass-card rounded p-8 flex flex-col justify-between min-h-[230px] reveal hover-target magnetic border-emerald-500/20 hover:border-emerald-500/40">
+                    <div class="text-emerald-400 text-2xl"><i class="fas fa-certificate"></i></div>
+                    <div class="mt-8">
+                        <h3 class="font-display text-xl md:text-2xl text-snow leading-tight mb-2">Certified Management Accountant</h3>
+                        <p class="font-body text-[10px] uppercase tracking-wider text-emerald-400 font-semibold">IMA, USA &bull; Candidate</p>
+                    </div>
+                </div>
+                
+                <!-- Cert 2 (IFRS - Global blue coded) -->
+                <div class="glass-card rounded p-8 flex flex-col justify-between min-h-[230px] reveal hover-target magnetic border-blue-500/20 hover:border-blue-500/40" style="transition-delay: 0.1s">
+                    <div class="text-blue-400 text-2xl"><i class="fas fa-file-invoice-dollar"></i></div>
+                    <div class="mt-8">
+                        <h3 class="font-display text-xl md:text-2xl text-snow leading-tight mb-2">International Financial Reporting</h3>
+                        <p class="font-body text-[10px] uppercase tracking-wider text-blue-400 font-semibold">IFRS License &bull; Advisor</p>
+                    </div>
+                </div>
+                
+                <!-- Cert 3 (CPT - Amber-gold coded) -->
+                <div class="glass-card rounded p-8 flex flex-col justify-between min-h-[230px] reveal hover-target magnetic border-amber-500/20 hover:border-amber-500/40" style="transition-delay: 0.2s">
+                    <div class="text-amber-400 text-2xl"><i class="fas fa-chalkboard-teacher"></i></div>
+                    <div class="mt-8">
+                        <h3 class="font-display text-xl md:text-2xl text-snow leading-tight mb-2">Certified Professional Trainer</h3>
+                        <p class="font-body text-[10px] uppercase tracking-wider text-amber-400 font-semibold">CPT License &bull; Practitioner</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. ACADEMIC & PROFESSIONAL EXPERIENCE (Timeline contrast & spacing) -->
+    <section id="experience" class="py-32 bg-black text-snow border-b border-white/5 relative">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                
+                <!-- Left Title Header (6-step typographic h2) -->
+                <div class="lg:col-span-4 reveal lg:sticky lg:top-28">
+                    <span class="font-body text-[9px] uppercase tracking-[0.25em] text-snow/45 font-bold block mb-4">CAREER HISTORIES</span>
+                    <h2 class="font-display text-3xl lg:text-4xl text-snow leading-tight mb-6">Academic & Professional Experience</h2>
+                    <p class="font-body text-snow/60 text-sm leading-relaxed font-light">
+                        A comprehensive track record of training delivery, academic instruction, and executive governance.
+                    </p>
+                </div>
+                
+                <!-- Right Timeline Items with Horizontal dividers -->
+                <div class="lg:col-span-8 space-y-8">
+                    <!-- Item 1 -->
+                    <div class="reveal py-8 border-b border-white/10 group hover-target flex flex-col md:flex-row md:items-start gap-6">
+                        <div class="md:w-1/3">
+                            <span class="font-body text-sm font-semibold text-snow/50 uppercase tracking-widest">Feb 2022 - Present</span>
+                        </div>
+                        <div class="md:w-2/3">
+                            <h3 class="font-display text-2xl text-white mb-2 leading-snug group-hover:text-snow/90 transition-colors">Certified Trainer</h3>
+                            <p class="font-body text-xs font-semibold text-gold uppercase tracking-widest mb-4">Institute of Professional Accountants, Egypt</p>
+                            <p class="font-body text-[15px]/relaxed text-snow/70 font-light leading-relaxed">Delivering expert preparation courses for CMA candidates and financial reporting update workshops.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Item 2 -->
+                    <div class="reveal py-8 border-b border-white/10 group hover-target flex flex-col md:flex-row md:items-start gap-6" style="transition-delay: 0.1s">
+                        <div class="md:w-1/3">
+                            <span class="font-body text-sm font-semibold text-snow/50 uppercase tracking-widest">2023 - Present</span>
+                        </div>
+                        <div class="md:w-2/3">
+                            <h3 class="font-display text-2xl text-white mb-2 leading-snug group-hover:text-snow/90 transition-colors">Academic Guidance Committee Member</h3>
+                            <p class="font-body text-xs font-semibold text-gold uppercase tracking-widest mb-4">Cairo University</p>
+                            <p class="font-body text-[15px]/relaxed text-snow/70 font-light leading-relaxed">Advising over 450 business students yearly on credit hours, course selections, and academic career paths.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="reveal py-8 border-b border-white/10 group hover-target flex flex-col md:flex-row md:items-start gap-6" style="transition-delay: 0.2s">
+                        <div class="md:w-1/3">
+                            <span class="font-body text-sm font-semibold text-snow/50 uppercase tracking-widest">2018 - Present</span>
+                        </div>
+                        <div class="md:w-2/3">
+                            <h3 class="font-display text-2xl text-white mb-2 leading-snug group-hover:text-snow/90 transition-colors">Academic Projects Supervisor</h3>
+                            <p class="font-body text-xs font-semibold text-gold uppercase tracking-widest mb-4">Cairo University & Egyptian Universities</p>
+                            <p class="font-body text-[15px]/relaxed text-snow/70 font-light leading-relaxed">Supervising numerous MBA, EMBA and Master's research papers on taxation, audit risks, and financial reporting.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 4 -->
+                    <div class="reveal py-8 border-b border-white/10 group hover-target flex flex-col md:flex-row md:items-start gap-6" style="transition-delay: 0.3s">
+                        <div class="md:w-1/3">
+                            <span class="font-body text-sm font-semibold text-snow/50 uppercase tracking-widest">Jan 2017 - Present</span>
+                        </div>
+                        <div class="md:w-2/3">
+                            <h3 class="font-display text-2xl text-white mb-2 leading-snug group-hover:text-snow/90 transition-colors">Accounting Lecturer</h3>
+                            <p class="font-body text-xs font-semibold text-gold uppercase tracking-widest mb-4">Cairo University, FOC</p>
+                            <p class="font-body text-[15px]/relaxed text-snow/70 font-light leading-relaxed">Instructing major undergraduate courses in Financial Accounting, Cost Accounting, and Auditing.</p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. TECHNICAL ROLES & DUTIES (py-32 Spacing Gaps) -->
+    <section class="py-32 bg-black text-snow border-b border-white/5 relative">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                <!-- Left Title (6-step typographic h2) -->
+                <div class="lg:col-span-4 reveal">
+                    <span class="font-body text-[9px] uppercase tracking-[0.25em] text-snow/45 font-bold block mb-4">TECHNICAL EXPERTISE</span>
+                    <h2 class="font-display text-3xl lg:text-4xl text-snow leading-tight">Professional Capabilities & Responsibilities</h2>
+                </div>
+                
+                <!-- Right Columns -->
+                <div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+                    <div class="reveal">
+                        <h4 class="font-body text-xs font-semibold text-snow mb-4 uppercase tracking-widest">&bull; EXECUTIVE TRAINING PROGRAMS</h4>
+                        <p class="font-body text-[15px]/relaxed text-snow/75 leading-relaxed font-light">
+                            Delivering highly specialized corporate training programs in Balanced Scorecard (BSC), Economic Value Added (EVA), Cost and Administrative Accounting, and corporate performance metrics.
+                        </p>
+                    </div>
+                    <div class="reveal" style="transition-delay: 0.1s">
+                        <h4 class="font-body text-xs font-semibold text-snow mb-4 uppercase tracking-widest">&bull; FEASIBILITY & ADVISORY</h4>
+                        <p class="font-body text-[15px]/relaxed text-snow/75 leading-relaxed font-light">
+                            Conducting full financial, environmental, and corporate competitive positioning feasibility studies, and preparing bank-ready funding application files for institutions.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. RESEARCH & PUBLICATIONS (Stark Highlights - py-32 Spacing Gaps) -->
+    <section id="publications" class="py-32 bg-black text-snow border-b border-white/5 relative">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                
+                <!-- Left Column (6-step typographic h2) -->
+                <div class="lg:col-span-4 reveal lg:sticky lg:top-28">
+                    <span class="font-body text-[9px] uppercase tracking-[0.25em] text-snow/45 font-bold block mb-4">SELECTED ARTICLES</span>
+                    <h2 class="font-display text-3xl lg:text-4xl text-snow leading-tight mb-6">Key Publications & Research</h2>
+                    <p class="font-body text-snow/60 text-sm leading-relaxed font-light">
+                        Exploring sustainability, auditing frameworks, expected credit losses, and income shifting in emerging economies.
+                    </p>
+                </div>
+                
+                <!-- Right Publications list -->
+                <div class="lg:col-span-8 space-y-12">
+                    <!-- Pub 1 -->
+                    <div class="reveal">
+                        <span class="font-body text-[9px] text-snow/40 tracking-wider block mb-2 uppercase">Journal Article &bull; September 2025</span>
+                        <h3 class="font-display text-xl md:text-2xl text-snow mb-3 leading-snug">Activating Green Taxes for Sustainability under Digital Transformation of the Egyptian Tax Authority</h3>
+                        <p class="font-body text-[15px]/relaxed text-snow/75 leading-relaxed font-light">
+                            A proposed framework to activate green taxes, supporting digital transformation compliance and climate-focused environmental performance metrics.
+                        </p>
+                    </div>
+                    
+                    <!-- Pub 2 -->
+                    <div class="reveal" style="transition-delay: 0.1s">
+                        <span class="font-body text-[9px] text-snow/40 tracking-wider block mb-2 uppercase">Empirical Study &bull; 2023</span>
+                        <h3 class="font-display text-xl md:text-2xl text-snow mb-3 leading-snug">The Impact of Expected Credit Losses (IFRS 9) on Capital Adequacy and Bank Stability</h3>
+                        <p class="font-body text-[15px]/relaxed text-snow/75 leading-relaxed font-light">
+                            Comparative analysis with previous standards (IAS 39), measuring capital buffers and stability in Egyptian commercial banks.
+                        </p>
+                    </div>
+                    
+                    <!-- Pub 3 -->
+                    <div class="reveal" style="transition-delay: 0.2s">
+                        <span class="font-body text-[9px] text-snow/40 tracking-wider block mb-2 uppercase">Comparative Review &bull; 2021</span>
+                        <h3 class="font-display text-xl md:text-2xl text-snow mb-3 leading-snug">Income Shifting in Multinational Corporations: A Review of International Evidence</h3>
+                        <p class="font-body text-[15px]/relaxed text-snow/75 leading-relaxed font-light">
+                            An analytical study on transfer pricing, tax avoidance models, and regulatory mechanisms in multinational settings.
+                        </p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. CONTACT / FOOTER SECTION (Stark Let's Talk - py-36 breathing room) -->
+    <section id="contact" class="bg-black text-snow pt-36 pb-24 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+            <!-- Massive Letter Callout (Signature Preserved) -->
+            <div class="reveal mb-24">
+                <span class="font-body text-[9px] uppercase tracking-[0.25em] text-snow/45 font-bold block mb-4">GET IN TOUCH</span>
+                <h2 class="font-display text-6xl md:text-8xl lg:text-[9vw] leading-none text-snow select-none tracking-tight">Let's Talk.</h2>
+            </div>
+            
+            <!-- Contact info 4 columns (body text size up) -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12 pt-8 border-t border-white/10 text-[15px]/relaxed font-body font-light text-snow/70">
+                <div>
+                    <span class="uppercase tracking-widest text-[9px] text-snow/40 block mb-3 font-semibold">Email</span>
+                    <a href="mailto:Waleed.ghoniem@foc.cu.edu.eg" class="hover-target text-snow hover:underline block truncate font-medium">Waleed.ghoniem@foc.cu.edu.eg</a>
+                </div>
+                <div>
+                    <span class="uppercase tracking-widest text-[9px] text-snow/40 block mb-3 font-semibold">Phone</span>
+                    <span class="text-snow font-medium">+20 100 900 8181</span>
+                    <span class="block text-[13px] text-snow/50 mt-1 font-light">+20 11 27700144</span>
+                </div>
+                <div>
+                    <span class="uppercase tracking-widest text-[9px] text-snow/40 block mb-3 font-semibold">Location</span>
+                    <span class="text-snow font-medium">Cairo, Egypt</span>
+                </div>
+                <div>
+                    <span class="uppercase tracking-widest text-[9px] text-snow/40 block mb-3 font-semibold">Languages</span>
+                    <span class="text-snow font-medium">Arabic &bull; Native</span>
+                    <span class="block text-snow mt-1 font-medium">English &bull; Excellent</span>
+                </div>
+            </div>
+
+            <!-- Tiny bottom copy -->
+            <div class="mt-24 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-snow/35 uppercase tracking-widest">
+                <div>&copy; 2026 Dr. Waleed Hamed Ghoniem. All rights reserved.</div>
+                <div class="flex gap-4">
+                    <a href="#" class="hover-target hover:text-white transition-colors relative group py-1">
+                        LinkedIn
+                        <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#" class="hover-target hover:text-white transition-colors relative group py-1">
+                        ResearchGate
+                        <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#" class="hover-target hover:text-white transition-colors relative group py-1">
+                        Google Scholar
+                        <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Smooth Scroll Lenis library -->
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
+    <script>
+        // Init Lenis smooth scroll
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+        })
+        function raf(time) {
+            lenis.raf(time)
+            requestAnimationFrame(raf)
+        }
+        requestAnimationFrame(raf)
+
+        // Preloader Logic
+        window.addEventListener('load', () => {
+            const preText = document.getElementById('preloader-text');
+            preText.classList.remove('translate-y-full', 'opacity-0');
+            
+            setTimeout(() => {
+                document.getElementById('preloader').classList.add('hide');
+                document.body.style.overflowY = 'auto';
+                
+                setTimeout(() => {
+                    document.querySelectorAll('.reveal').forEach(el => {
+                        const rect = el.getBoundingClientRect();
+                        if(rect.top < window.innerHeight) {
+                            el.classList.add('active');
+                        }
+                    });
+                }, 400);
+            }, 1000);
+        });
+        
+        // Prevent scroll while preloading
+        document.body.style.overflowY = 'hidden';
+
+        const isFinePointer = window.matchMedia("(pointer: fine)").matches;
+
+        // Custom Cursor & Glow Orb Logic
+        const cursorDot = document.getElementById('cursor-dot');
+        const cursorOutline = document.getElementById('cursor-outline');
+        const glowOrb = document.getElementById('glow-orb');
+        const hoverTargets = document.querySelectorAll('.hover-target, a, button');
+
+        if (isFinePointer) {
+            window.addEventListener('mousemove', (e) => {
+                const posX = e.clientX;
+                const posY = e.clientY;
+
+                cursorDot.style.left = `${posX}px`;
+                cursorDot.style.top = `${posY}px`;
+
+                cursorOutline.animate({
+                    left: `${posX}px`,
+                    top: `${posY}px`
+                }, { duration: 300, fill: "forwards" });
+
+                // Move glow orb slowly
+                glowOrb.style.left = `${posX}px`;
+                glowOrb.style.top = `${posY}px`;
+            });
+
+            hoverTargets.forEach(target => {
+                target.addEventListener('mouseenter', () => {
+                    cursorOutline.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                    cursorOutline.style.backgroundColor = 'rgba(255, 251, 252, 0.1)';
+                    cursorDot.style.transform = 'translate(-50%, -50%) scale(0.5)';
+                });
+                target.addEventListener('mouseleave', () => {
+                    cursorOutline.style.transform = 'translate(-50%, -50%) scale(1)';
+                    cursorOutline.style.backgroundColor = 'transparent';
+                    cursorDot.style.transform = 'translate(-50%, -50%) scale(1)';
+                });
+            });
+
+            // Magnetic Elements Logic
+            const magnetics = document.querySelectorAll('.magnetic');
+            magnetics.forEach((elem) => {
+                elem.addEventListener('mousemove', (e) => {
+                    const rect = elem.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+                    elem.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+                });
+                elem.addEventListener('mouseleave', () => {
+                    elem.style.transform = `translate(0px, 0px)`;
+                });
+            });
+        } else {
+            cursorDot.style.display = 'none';
+            cursorOutline.style.display = 'none';
+            glowOrb.style.display = 'none';
+            document.body.style.cursor = 'auto';
+        }
+
+        // Scroll Progress Bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('scroll-progress').style.width = scrolled + '%';
+        });
+
+        // Scroll Reveal Logic using IntersectionObserver
+        const reveals = document.querySelectorAll('.reveal');
+        const revealOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, revealOptions);
+
+        reveals.forEach(reveal => {
+            revealOnScroll.observe(reveal);
+        });
+    </script>
+</body>
+</html>

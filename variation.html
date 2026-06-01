@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-black text-snow">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Waleed Ghoniem | Academic & Consultant (Premium Variation)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        black: '#010400',
+                        charcoal: '#30332e',
+                        snow: '#fffbfc',
+                        gold: '#C5A880',
+                    },
+                    fontFamily: {
+                        display: ['Prata', 'serif'],
+                        body: ['Epilogue', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@300;400;500;600&family=Prata&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --black: #010400;
+            --charcoal: #30332e;
+            --snow: #fffbfc;
+            --gold: #C5A880;
+        }
+        body {
+            background-color: var(--black);
+            color: var(--snow);
+            cursor: none;
+            overflow-x: hidden;
+            overscroll-behavior: none;
+        }
+        ::selection {
+            background: var(--gold);
+            color: var(--black);
+        }
+        
+        /* Custom Cursor */
+        .cursor-dot {
+            position: fixed;
+            top: 0; left: 0;
+            width: 8px; height: 8px;
+            background-color: var(--gold);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 10000;
+            transition: width 0.3s, height 0.3s, background-color 0.3s;
+        }
+        .cursor-outline {
+            position: fixed;
+            top: 0; left: 0;
+            width: 40px; height: 40px;
+            border: 1px solid rgba(197, 168, 128, 0.5); /* gold */
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9998;
+            transition: transform 0.15s ease-out, width 0.3s, height 0.3s;
+        }
+
+        /* Ambient Glow */
+        #glow-orb {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(197, 168, 128, 0.08) 0%, rgba(1,4,0,0) 70%);
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(50px);
+            transition: top 2s ease-out, left 2s ease-out;
+        }
+        
+        /* Scroll Reveal Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Magnetic Elements */
+        .magnetic {
+            display: inline-block;
+            transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1);
+        }
+
+        /* Abstract Graphic Backgrounds */
+        .bg-chart {
+            background-image: repeating-linear-gradient(to right, transparent, transparent 40px, rgba(197, 168, 128, 0.03) 40px, rgba(197, 168, 128, 0.03) 41px), 
+                              repeating-linear-gradient(to bottom, transparent, transparent 40px, rgba(197, 168, 128, 0.03) 40px, rgba(197, 168, 128, 0.03) 41px);
+        }
+
+        /* Preloader */
+        #preloader {
+            position: fixed;
+            inset: 0;
+            background: var(--black);
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 1.2s cubic-bezier(0.76, 0, 0.24, 1);
+        }
+        #preloader.hide {
+            transform: translateY(-100%);
+        }
+
+        /* Utilities */
+        ::-webkit-scrollbar { display: none; }
+        .text-gold { color: var(--gold); }
+        .bg-gold { background-color: var(--gold); }
+        .border-gold { border-color: var(--gold); }
+        
+        /* Glass Card */
+        .glass-card {
+            background: rgba(255, 251, 252, 1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        .glass-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="font-display text-4xl text-gold overflow-hidden">
+            <span class="inline-block transition-transform duration-1000 translate-y-full opacity-0" id="preloader-text">WG.</span>
+        </div>
+    </div>
+
+    <div id="glow-orb"></div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-outline" id="cursor-outline"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full px-8 py-6 flex justify-between items-center z-50 bg-black/80 backdrop-blur-md border-b border-white/5">
+        <div class="font-display text-3xl tracking-wider text-gold select-none magnetic hover-target">WG.</div>
+        <div class="hidden md:flex gap-8 font-body text-xs text-snow/80">
+            <a href="#about" class="hover-target magnetic hover:text-gold transition-colors">About</a>
+            <a href="#experience" class="hover-target magnetic hover:text-gold transition-colors">Experience</a>
+            <a href="#research" class="hover-target magnetic hover:text-gold transition-colors">Research</a>
+            <a href="#publications" class="hover-target magnetic hover:text-gold transition-colors">Publications</a>
+            <a href="#contact" class="hover-target magnetic hover:text-gold transition-colors">Contact</a>
+        </div>
+        <div class="flex items-center z-50">
+            <a href="ar.html" class="hover-target magnetic px-4 py-1.5 border border-white/20 rounded-full hover:border-gold hover:text-gold transition-colors text-xs font-body text-snow/90">عربي</a>
+        </div>
+    </nav>
+
+    <!-- 1. HERO SECTION (Black) -->
+    <main class="w-full relative z-10 pt-32 pb-24 md:pb-32 bg-chart min-h-screen flex items-center">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center w-full">
+                <!-- Left Text -->
+                <div class="reveal">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-[1px] bg-gold"></div>
+                        <span class="font-body text-[10px] uppercase tracking-widest text-gold font-semibold">Accounting Lecturer & Consultant</span>
+                    </div>
+                    
+                    <h1 class="font-display text-5xl lg:text-7xl leading-[1.1] text-snow mb-6">
+                        Dr. Waleed<br>Hamed Ghoniem
+                    </h1>
+                    
+                    <p class="font-body text-snow/70 text-lg leading-relaxed font-light mb-10 max-w-md">
+                        Accomplished academic and consultant with proven expertise in training, strategic planning, and organizational development.
+                    </p>
+                    
+                    <div class="flex flex-wrap gap-4 mb-16">
+                        <a href="#contact" class="hover-target magnetic inline-flex items-center gap-3 bg-gold text-black px-8 py-3.5 rounded-sm text-sm font-medium hover:bg-snow hover:text-black transition-all duration-300">
+                            Get in Touch <span class="transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
+                        </a>
+                        <a href="links.html" class="hover-target magnetic inline-flex items-center gap-3 border border-gold/30 text-snow px-8 py-3.5 rounded-sm text-sm font-medium hover:border-gold hover:text-gold hover:bg-white/5 transition-all duration-300">
+                            View Links <span class="transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
+                        </a>
+                    </div>
+                    
+                    <!-- Stats Row with Vertical Dividers -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-0 border-t border-snow/10 pt-8 mt-12 w-full">
+                        <!-- Stat 1 -->
+                        <div class="flex flex-col items-start md:pr-6 md:border-r md:border-snow/10">
+                            <i class="fas fa-trophy text-gold text-base mb-3"></i>
+                            <h4 class="font-display text-3xl text-snow mb-1">15+</h4>
+                            <p class="font-body text-[10px] text-snow/50 uppercase tracking-wider leading-tight">Years of<br>Experience</p>
+                        </div>
+                        <!-- Stat 2 -->
+                        <div class="flex flex-col items-start md:px-6 md:border-r md:border-snow/10">
+                            <i class="fas fa-graduation-cap text-gold text-base mb-3"></i>
+                            <h4 class="font-display text-3xl text-snow mb-1">50+</h4>
+                            <p class="font-body text-[10px] text-snow/50 uppercase tracking-wider leading-tight">Training<br>Programs</p>
+                        </div>
+                        <!-- Stat 3 -->
+                        <div class="flex flex-col items-start md:px-6 md:border-r md:border-snow/10">
+                            <i class="fas fa-book-open text-gold text-base mb-3"></i>
+                            <h4 class="font-display text-3xl text-snow mb-1">20+</h4>
+                            <p class="font-body text-[10px] text-snow/50 uppercase tracking-wider leading-tight">Research<br>Publications</p>
+                        </div>
+                        <!-- Stat 4 -->
+                        <div class="flex flex-col items-start md:pl-6">
+                            <i class="fas fa-university text-gold text-base mb-3"></i>
+                            <h4 class="font-display text-3xl text-snow mb-1">5</h4>
+                            <p class="font-body text-[10px] text-snow/50 uppercase tracking-wider leading-tight">Universities<br>Collaborated</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Portrait & Graph Elements -->
+                <div class="relative reveal h-full flex items-center justify-center lg:justify-end min-h-[500px]" style="transition-delay: 0.2s">
+                    
+                    <!-- Circular architectural grid lines overlay in background -->
+                    <svg class="absolute left-[-15%] top-[-5%] w-[120%] h-[110%] opacity-20 pointer-events-none z-0" viewBox="0 0 500 500" fill="none">
+                        <circle cx="250" cy="250" r="100" stroke="#C5A880" stroke-width="0.5" stroke-dasharray="2 4" />
+                        <circle cx="250" cy="250" r="150" stroke="#C5A880" stroke-width="0.5" />
+                        <circle cx="250" cy="250" r="200" stroke="#C5A880" stroke-width="0.5" />
+                        <circle cx="250" cy="250" r="250" stroke="#C5A880" stroke-width="0.5" stroke-dasharray="8 4" />
+                        <line x1="250" y1="0" x2="250" y2="500" stroke="#C5A880" stroke-width="0.3" opacity="0.3" />
+                        <line x1="0" y1="250" x2="500" y2="250" stroke="#C5A880" stroke-width="0.3" opacity="0.3" />
+                    </svg>
+
+                    <!-- Abstract floating graph bars behind (gradient-faded) -->
+                    <div class="absolute bottom-10 right-[-20px] lg:right-[-40px] flex items-end gap-2 opacity-30 z-0">
+                        <div class="w-3.5 h-16 bg-gradient-to-t from-gold/0 to-gold/50"></div>
+                        <div class="w-3.5 h-24 bg-gradient-to-t from-gold/0 to-gold/50"></div>
+                        <div class="w-3.5 h-36 bg-gradient-to-t from-gold/0 to-gold/50"></div>
+                        <div class="w-3.5 h-48 bg-gradient-to-t from-gold/0 to-gold/50"></div>
+                        <div class="w-3.5 h-64 bg-gradient-to-t from-gold/0 to-gold/50"></div>
+                    </div>
+
+                    <!-- Floating Keywords on Right -->
+                    <div class="hidden xl:flex flex-col gap-3 absolute right-[-100px] top-[40%] transform -translate-y-1/2 z-20 font-body text-[9px] tracking-[0.2em] text-snow/60 text-left font-light select-none">
+                        <span class="hover:text-gold transition-colors duration-300">STRATEGIC THINKER.</span>
+                        <span class="hover:text-gold transition-colors duration-300">EDUCATOR.</span>
+                        <span class="hover:text-gold transition-colors duration-300">CONSULTANT.</span>
+                        <div class="w-8 h-[1.5px] bg-gold/60 mt-1"></div>
+                    </div>
+
+                    <!-- Image Frame Container -->
+                    <div class="relative w-[85%] sm:w-[75%] lg:w-[85%] xl:w-[78%] aspect-[3/4] z-10 group">
+                        <!-- Gold offset frame behind -->
+                        <div class="absolute -top-5 -left-5 w-full h-full border border-gold/45 transition-transform duration-700 group-hover:translate-x-2 group-hover:translate-y-2 z-0"></div>
+                        
+                        <!-- Inner box with image -->
+                        <div class="w-full h-full overflow-hidden bg-charcoal/10 relative z-10">
+                            <img src="freash%20cool%20suit%20.jpeg" alt="Dr. Waleed Ghoniem" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 scale-105 group-hover:scale-100">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Scroll to Explore -->
+            <div class="absolute bottom-[-40px] left-6 lg:left-8 hidden lg:flex items-center gap-3 text-snow/40 font-body text-[9px] uppercase tracking-[0.2em] pointer-events-none select-none">
+                <span>Scroll to explore</span>
+                <i class="fas fa-arrow-down text-gold animate-bounce text-xs"></i>
+            </div>
+        </div>
+    </main>
+
+    <!-- 2. EDUCATION SECTION (Snow) -->
+    <section id="about" class="bg-snow text-black py-24 relative">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <span class="font-body text-[10px] uppercase tracking-widest text-gold font-bold block mb-4">Academic Background</span>
+                <h2 class="font-display text-4xl lg:text-5xl text-black">Education & Qualifications</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- PhD -->
+                <div class="glass-card rounded p-8 border-t-2 border-gold reveal hover-target magnetic relative overflow-hidden group">
+                    <div class="flex items-center gap-6 mb-8 relative z-10">
+                        <div class="w-16 h-16 rounded-full bg-gold/10 flex items-center justify-center text-gold text-2xl flex-shrink-0 group-hover:bg-gold group-hover:text-white transition-colors duration-500">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-display text-2xl text-black leading-tight mb-2">Ph.D. in Accounting</h3>
+                            <p class="font-body text-sm text-charcoal">Cairo University</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 font-body text-xs text-charcoal/60 relative z-10">
+                        <i class="far fa-calendar text-gold"></i> 2017
+                    </div>
+                </div>
+                
+                <!-- Masters -->
+                <div class="glass-card rounded p-8 border-t-2 border-gold reveal hover-target magnetic relative overflow-hidden group" style="transition-delay: 0.1s">
+                    <div class="flex items-center gap-6 mb-8 relative z-10">
+                        <div class="w-16 h-16 rounded-full bg-gold/10 flex items-center justify-center text-gold text-2xl flex-shrink-0 group-hover:bg-gold group-hover:text-white transition-colors duration-500">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-display text-2xl text-black leading-tight mb-2">Master's in Accounting</h3>
+                            <p class="font-body text-sm text-charcoal">Cairo University</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 font-body text-xs text-charcoal/60 relative z-10">
+                        <i class="far fa-calendar text-gold"></i> 2012
+                    </div>
+                </div>
+                
+                <!-- Bachelors -->
+                <div class="glass-card rounded p-8 border-t-2 border-gold reveal hover-target magnetic relative overflow-hidden group" style="transition-delay: 0.2s">
+                    <div class="flex items-center gap-6 mb-8 relative z-10">
+                        <div class="w-16 h-16 rounded-full bg-gold/10 flex items-center justify-center text-gold text-2xl flex-shrink-0 group-hover:bg-gold group-hover:text-white transition-colors duration-500">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-display text-2xl text-black leading-tight mb-2">Bachelor of Commerce</h3>
+                            <p class="font-body text-sm text-charcoal">Cairo University</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 font-body text-xs text-charcoal/60 relative z-10">
+                        <i class="far fa-calendar text-gold"></i> 2007
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. EXPERIENCE SECTION (Snow) -->
+    <section id="experience" class="bg-snow text-black py-24 border-t border-charcoal/10 relative">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-16">
+            
+            <!-- Left Info -->
+            <div class="lg:col-span-4 reveal">
+                <span class="font-body text-[10px] uppercase tracking-widest text-gold font-bold block mb-4">Professional Experience</span>
+                <h2 class="font-display text-4xl lg:text-5xl text-black mb-6">Experience<br>Timeline</h2>
+                <p class="font-body text-charcoal/70 text-sm leading-relaxed mb-10">
+                    A journey of continuous growth, leadership, and impact in academia and consulting.
+                </p>
+                <a href="#contact" class="hover-target magnetic inline-flex items-center gap-3 border border-charcoal/20 text-black px-6 py-3 text-xs font-medium hover:border-gold hover:text-gold transition-colors">
+                    View Full Experience <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- Right Timeline -->
+            <div class="lg:col-span-8 relative">
+                <!-- Vertical Line -->
+                <div class="absolute left-[24px] top-4 bottom-4 w-[1px] bg-gold/40"></div>
+                
+                <div class="space-y-12">
+                    <!-- Timeline Item 1 -->
+                    <div class="reveal relative flex gap-8 group hover-target">
+                        <div class="absolute left-[21px] top-5 w-2 h-2 rounded-full bg-snow border border-gold z-10 group-hover:bg-gold transition-colors"></div>
+                        <div class="w-12 h-12 rounded-full bg-black flex items-center justify-center text-white flex-shrink-0 z-10 mt-1 shadow-lg group-hover:scale-110 transition-transform">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <div>
+                            <span class="font-body text-[10px] uppercase tracking-widest text-gold font-bold block mb-1">Feb 2022 - Present</span>
+                            <h3 class="font-display text-2xl text-black mb-1">Certified Trainer</h3>
+                            <p class="font-body text-xs font-medium text-charcoal mb-3">Institute of Professional Accountants</p>
+                            <p class="font-body text-sm text-charcoal/70 leading-relaxed font-light">Delivering professional training programs in accounting, auditing, financial reporting, and strategy.</p>
+                        </div>
+                    </div>
+
+                    <!-- Timeline Item 2 -->
+                    <div class="reveal relative flex gap-8 group hover-target" style="transition-delay: 0.1s">
+                        <div class="absolute left-[21px] top-5 w-2 h-2 rounded-full bg-snow border border-gold z-10 group-hover:bg-gold transition-colors"></div>
+                        <div class="w-12 h-12 rounded-full bg-black flex items-center justify-center text-white flex-shrink-0 z-10 mt-1 shadow-lg group-hover:scale-110 transition-transform">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        <div>
+                            <span class="font-body text-[10px] uppercase tracking-widest text-gold font-bold block mb-1">Jan 2017 - Present</span>
+                            <h3 class="font-display text-2xl text-black mb-1">Accounting Lecturer</h3>
+                            <p class="font-body text-xs font-medium text-charcoal mb-3">Multiple Universities</p>
+                            <p class="font-body text-sm text-charcoal/70 leading-relaxed font-light">Teaching undergraduate and postgraduate courses in financial accounting, managerial accounting, and auditing.</p>
+                        </div>
+                    </div>
+
+                    <!-- Timeline Item 3 -->
+                    <div class="reveal relative flex gap-8 group hover-target" style="transition-delay: 0.2s">
+                        <div class="absolute left-[21px] top-5 w-2 h-2 rounded-full bg-snow border border-gold z-10 group-hover:bg-gold transition-colors"></div>
+                        <div class="w-12 h-12 rounded-full bg-black flex items-center justify-center text-white flex-shrink-0 z-10 mt-1 shadow-lg group-hover:scale-110 transition-transform">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div>
+                            <span class="font-body text-[10px] uppercase tracking-widest text-gold font-bold block mb-1">2017 - 2020</span>
+                            <h3 class="font-display text-2xl text-black mb-1">Deputy Director of Quality Assurance</h3>
+                            <p class="font-body text-xs font-medium text-charcoal mb-3">Cairo University</p>
+                            <p class="font-body text-sm text-charcoal/70 leading-relaxed font-light">Led quality assurance initiatives and accreditation processes to enhance academic performance and compliance.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- 4. RESEARCH & PUBLICATIONS (Snow with faint bg) -->
+    <section id="research" class="bg-snow text-black py-24 border-t border-charcoal/10 relative overflow-hidden">
+        <!-- Faint watermark background -->
+        <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: url('https://www.transparenttextures.com/patterns/cubes.png');"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 reveal">
+                <div>
+                    <span class="font-body text-[10px] uppercase tracking-widest text-gold font-bold block mb-4">Research & Publications</span>
+                    <h2 class="font-display text-4xl lg:text-5xl text-black">Selected Research<br>& Publications</h2>
+                </div>
+                <a href="#" class="hover-target magnetic text-gold text-sm font-medium hover:text-black transition-colors mt-6 md:mt-0 flex items-center gap-2">
+                    View All Publications <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            
+            <div class="space-y-4">
+                <!-- Pub 1 -->
+                <div class="reveal bg-white p-6 md:p-8 rounded shadow-sm border border-charcoal/5 flex flex-col md:flex-row gap-6 items-start md:items-center justify-between hover:shadow-md transition-shadow group hover-target">
+                    <div class="flex items-start gap-6">
+                        <div class="w-8 h-8 rounded-full bg-gold text-white flex items-center justify-center flex-shrink-0 mt-1 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-check text-xs"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-body font-semibold text-black mb-1 text-sm md:text-base">Activating Green Taxes for Sustainability: Evidence from Emerging Economics</h3>
+                            <p class="font-body text-xs text-charcoal/60">Journal of Environmental Accounting & Management</p>
+                        </div>
+                    </div>
+                    <div class="font-display text-gold text-xl font-bold md:ml-auto">2025</div>
+                </div>
+
+                <!-- Pub 2 -->
+                <div class="reveal bg-white p-6 md:p-8 rounded shadow-sm border border-charcoal/5 flex flex-col md:flex-row gap-6 items-start md:items-center justify-between hover:shadow-md transition-shadow group hover-target" style="transition-delay: 0.1s">
+                    <div class="flex items-start gap-6">
+                        <div class="w-8 h-8 rounded-full bg-gold text-white flex items-center justify-center flex-shrink-0 mt-1 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-check text-xs"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-body font-semibold text-black mb-1 text-sm md:text-base">Impact of Expected Credit Losses (IFRS 9) on Financial Stability</h3>
+                            <p class="font-body text-xs text-charcoal/60">International Journal of Accounting & Finance</p>
+                        </div>
+                    </div>
+                    <div class="font-display text-gold text-xl font-bold md:ml-auto">2023</div>
+                </div>
+
+                <!-- Pub 3 -->
+                <div class="reveal bg-white p-6 md:p-8 rounded shadow-sm border border-charcoal/5 flex flex-col md:flex-row gap-6 items-start md:items-center justify-between hover:shadow-md transition-shadow group hover-target" style="transition-delay: 0.2s">
+                    <div class="flex items-start gap-6">
+                        <div class="w-8 h-8 rounded-full bg-gold text-white flex items-center justify-center flex-shrink-0 mt-1 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-check text-xs"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-body font-semibold text-black mb-1 text-sm md:text-base">Income Shifting in Multinational Corporations: An Empirical Study</h3>
+                            <p class="font-body text-xs text-charcoal/60">Global Journal of Business & Economics</p>
+                        </div>
+                    </div>
+                    <div class="font-display text-gold text-xl font-bold md:ml-auto">2021</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. CONTACT SECTION (Black) -->
+    <section id="contact" class="bg-black text-snow py-24 relative overflow-hidden">
+        <div class="absolute right-0 bottom-0 opacity-[0.02] pointer-events-none">
+            <!-- Subtle abstract pillar graphic or just massive text -->
+            <div class="font-display text-[20vw] leading-none text-white whitespace-nowrap">CONTACT</div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 relative z-10">
+            <!-- Left Info -->
+            <div class="reveal">
+                <span class="font-body text-[10px] uppercase tracking-widest text-gold font-bold block mb-4">Get In Touch</span>
+                <h2 class="font-display text-4xl lg:text-6xl text-snow mb-6">Let's Work<br>Together</h2>
+                <p class="font-body text-snow/70 text-sm leading-relaxed mb-12 max-w-sm">
+                    Whether you have a question, need a consultation, or want to collaborate, I'd love to hear from you.
+                </p>
+                
+                <div class="space-y-6">
+                    <a href="mailto:Waleed.ghoniem@foc.cu.edu.eg" class="flex items-center gap-4 hover-target group">
+                        <div class="w-5 text-gold group-hover:scale-110 transition-transform"><i class="far fa-envelope"></i></div>
+                        <span class="font-body text-sm text-snow/80 group-hover:text-gold transition-colors">Waleed.ghoniem@foc.cu.edu.eg</span>
+                    </a>
+                    <div class="flex items-center gap-4">
+                        <div class="w-5 text-gold"><i class="fas fa-phone-alt text-sm"></i></div>
+                        <span class="font-body text-sm text-snow/80">+20 100 900 8181</span>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-5 text-gold"><i class="fas fa-map-marker-alt"></i></div>
+                        <span class="font-body text-sm text-snow/80">Cairo, Egypt</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Form -->
+            <div class="reveal" style="transition-delay: 0.2s">
+                <form action="mailto:Waleed.ghoniem@foc.cu.edu.eg" method="POST" enctype="text/plain" class="flex flex-col gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <input type="text" placeholder="Name" class="bg-transparent border border-snow/20 rounded p-4 text-sm font-body text-snow focus:border-gold focus:outline-none transition-colors hover-target">
+                        <input type="email" placeholder="Email" class="bg-transparent border border-snow/20 rounded p-4 text-sm font-body text-snow focus:border-gold focus:outline-none transition-colors hover-target">
+                    </div>
+                    <textarea placeholder="Message" rows="5" class="bg-transparent border border-snow/20 rounded p-4 text-sm font-body text-snow focus:border-gold focus:outline-none transition-colors hover-target resize-none"></textarea>
+                    
+                    <button type="submit" class="bg-gold text-black font-body font-semibold py-4 rounded hover:bg-snow transition-colors hover-target magnetic w-full flex justify-center items-center gap-2">
+                        Send Message <i class="far fa-paper-plane text-sm"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#010400] text-snow py-8 border-t border-white/5 relative z-10">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="font-display text-3xl text-gold">WG.</div>
+            
+            <div class="font-body text-[10px] text-snow/40 uppercase tracking-widest">
+                &copy; 2026 Dr. Waleed Hamed Ghoniem. All Rights Reserved.
+            </div>
+            
+            <div class="flex gap-4">
+                <a href="#" class="w-10 h-10 border border-snow/20 rounded flex items-center justify-center text-snow/60 hover:text-gold hover:border-gold transition-colors hover-target magnetic"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="w-10 h-10 border border-snow/20 rounded flex items-center justify-center text-snow/60 hover:text-gold hover:border-gold transition-colors hover-target magnetic"><i class="fas fa-book"></i></a>
+                <a href="#" class="w-10 h-10 border border-snow/20 rounded flex items-center justify-center text-snow/60 hover:text-gold hover:border-gold transition-colors hover-target magnetic"><i class="fas fa-globe"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Smooth Scroll Lenis library -->
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
+    <script>
+        // Init Lenis smooth scroll
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+        })
+        function raf(time) {
+            lenis.raf(time)
+            requestAnimationFrame(raf)
+        }
+        requestAnimationFrame(raf)
+
+        // Preloader Logic
+        window.addEventListener('load', () => {
+            const preText = document.getElementById('preloader-text');
+            preText.classList.remove('translate-y-full', 'opacity-0');
+            
+            setTimeout(() => {
+                document.getElementById('preloader').classList.add('hide');
+                document.body.style.overflowY = 'auto';
+                
+                setTimeout(() => {
+                    document.querySelectorAll('.reveal').forEach(el => {
+                        const rect = el.getBoundingClientRect();
+                        if(rect.top < window.innerHeight) {
+                            el.classList.add('active');
+                        }
+                    });
+                }, 400);
+            }, 1000);
+        });
+        
+        // Prevent scroll while preloading
+        document.body.style.overflowY = 'hidden';
+
+        const isFinePointer = window.matchMedia("(pointer: fine)").matches;
+
+        // Custom Cursor & Glow Orb Logic
+        const cursorDot = document.getElementById('cursor-dot');
+        const cursorOutline = document.getElementById('cursor-outline');
+        const glowOrb = document.getElementById('glow-orb');
+        const hoverTargets = document.querySelectorAll('.hover-target, a, button');
+
+        if (isFinePointer) {
+            window.addEventListener('mousemove', (e) => {
+                const posX = e.clientX;
+                const posY = e.clientY;
+
+                cursorDot.style.left = `${posX}px`;
+                cursorDot.style.top = `${posY}px`;
+
+                cursorOutline.animate({
+                    left: `${posX}px`,
+                    top: `${posY}px`
+                }, { duration: 300, fill: "forwards" });
+
+                // Move glow orb slowly
+                glowOrb.style.left = `${posX}px`;
+                glowOrb.style.top = `${posY}px`;
+            });
+
+            hoverTargets.forEach(target => {
+                target.addEventListener('mouseenter', () => {
+                    cursorOutline.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                    cursorOutline.style.backgroundColor = 'rgba(197, 168, 128, 0.1)';
+                    cursorDot.style.transform = 'translate(-50%, -50%) scale(0.5)';
+                });
+                target.addEventListener('mouseleave', () => {
+                    cursorOutline.style.transform = 'translate(-50%, -50%) scale(1)';
+                    cursorOutline.style.backgroundColor = 'transparent';
+                    cursorDot.style.transform = 'translate(-50%, -50%) scale(1)';
+                });
+            });
+
+            // Magnetic Elements Logic
+            const magnetics = document.querySelectorAll('.magnetic');
+            magnetics.forEach((elem) => {
+                elem.addEventListener('mousemove', (e) => {
+                    const rect = elem.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+                    elem.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+                });
+                elem.addEventListener('mouseleave', () => {
+                    elem.style.transform = `translate(0px, 0px)`;
+                });
+            });
+        } else {
+            cursorDot.style.display = 'none';
+            cursorOutline.style.display = 'none';
+            glowOrb.style.display = 'none';
+            document.body.style.cursor = 'auto';
+        }
+
+        // Scroll Reveal Logic using IntersectionObserver
+        const reveals = document.querySelectorAll('.reveal');
+        const revealOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, revealOptions);
+
+        reveals.forEach(reveal => {
+            revealOnScroll.observe(reveal);
+        });
+    </script>
+</body>
+</html>

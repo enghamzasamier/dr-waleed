@@ -1,0 +1,10 @@
+**Design Goal:** Create an elegant, professional, and minimalist logo for an Accounting Lecturer and Consultant named Dr. Waleed Ghoniem. The logo should use a monogram of the letters "WG".
+
+**Primary Prompt:**
+"A minimalist, professional corporate logo for an academic and financial consultant. The logo features a sleek, elegant monogram of the intertwined letters 'WG'. The typography should be a mix of modern serif and clean sans-serif, conveying trust, prestige, and academic authority. Minimalist geometric elements, perhaps a subtle hint of a ledger line, a rising chart arrow, or an open book integrated into the letters, but keeping it highly abstract and clean. Vector style, flat design, no 3D rendering, highly polished."
+
+**Please generate the image showing these 3 color variations side-by-side in the same image:**
+
+1. **Variation 1 (The Classic Executive):** The "WG" monogram in solid Champagne Gold (#C5A880) placed on a dark Deep Royal Navy Blue (#0F172A) background.
+2. **Variation 2 (The Clean Academic):** The "WG" monogram in Deep Royal Navy Blue (#0F172A) with subtle Champagne Gold accents, placed on a clean Soft Off-White (#F8FAFC) background.
+3. **Variation 3 (The Modern Consultant):** The "WG" monogram in Champagne Gold (#C5A880) placed on a sleek Slate Grey (#334155) background.

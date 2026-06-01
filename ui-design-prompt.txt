@@ -1,0 +1,57 @@
+**Design Role:** Expert UI/UX Web Designer
+**Project:** A premium, single-page portfolio website for an Accounting Lecturer and Consultant.
+**Style:** Professional, highly polished, minimalist, corporate yet academic, trustworthy, and premium. The UI should look like it belongs to a top-tier financial consultant or university professor.
+
+**Color Palette:**
+- Primary / Backgrounds: Deep Royal Navy Blue (#0F172A)
+- Accent / Highlights: Champagne Gold (#C5A880)
+- Text / Neutrals: Slate Grey (#334155)
+- Secondary Backgrounds: Soft Off-White / Alabaster (#F8FAFC) and Pure White (#FFFFFF)
+
+**Typography:**
+- Headings: Elegant modern serif (e.g., Playfair Display or Merriweather)
+- Body text: Clean, legible sans-serif (e.g., Inter or Roboto)
+
+**Please design a full-page website mockup showing the following sections from top to bottom:**
+
+**1. Navigation Bar:**
+- Navy Blue background.
+- Left: A sleek logo monogram "WG" in Champagne Gold.
+- Center: Clean links (About, Experience, Research, Contact).
+- Right: A small language toggle button (English / عربي).
+
+**2. Hero Section:**
+- Navy Blue background.
+- Layout: Split 50/50.
+- Left side text: "Dr. Waleed Hamed Ghoniem" (Large Serif), "Accounting Lecturer & Consultant" (Gold text). A short paragraph: "Accomplished academic and consultant with proven expertise in training, strategic planning, and organizational development."
+- Buttons: "Get in Touch" (Solid Gold), "View Links" (Outlined White).
+- Right side: A placeholder for a professional headshot inside a sleek frame, or a stylized abstract 3D geometric shape representing finance/growth.
+
+**3. Academic Background (About) Section:**
+- Alabaster Off-White background.
+- A grid of 3 elegant, minimalist cards with subtle drop shadows and gold top-borders.
+- Card 1: "Ph.D. in Accounting" (Cairo University, 2017).
+- Card 2: "Master's in Accounting" (Cairo University, 2012).
+- Card 3: "Bachelor of Commerce" (Cairo University, 2007).
+- Include subtle, minimalist icons (graduation cap, university, book) in gold.
+
+**4. Professional Experience Section:**
+- Pure White background.
+- A sleek vertical timeline or "ledger-style" list.
+- Entry 1: "Certified Trainer - Institute of Professional Accountants (Feb 2022 – Present)".
+- Entry 2: "Accounting Lecturer - Multiple Universities (Jan 2017 – Present)".
+- Entry 3: "Deputy Director of Quality Assurance Unit - Cairo University (2017 – 2020)".
+
+**5. Research & Publications Section:**
+- Alabaster Off-White background.
+- A clean, modern list layout emphasizing readability.
+- Display titles of papers like: "Activating Green Taxes for Sustainability", "Impact of Expected Credit Losses (IFRS 9)", "Income Shifting in Multinational Corporations".
+- Use subtle gold checkmarks or ledger bullets next to each item.
+
+**6. Contact Section (Footer area):**
+- Navy Blue background.
+- A clean, minimalist contact form box floating slightly over the background.
+- Fields: "Name", "Email", "Message" with thin gold or grey borders.
+- A solid gold "Send Message" button.
+
+**Overall Vibe:** High contrast between the Navy Blue and Off-White sections, with the Champagne Gold drawing the eye to important elements. Ensure the design feels like a modern SaaS or high-end consulting firm.
